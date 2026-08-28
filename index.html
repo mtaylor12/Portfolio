@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maggie Taylor</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Google Fonts: Playfair Display + Source Sans 3 -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Tokens ────────────────────────────────────── */
+    :root {
+      --color-bg:       #F5F0E8;   /* warm sand */
+      --color-surface:  #FDFBF7;   /* soft off-white */
+      --color-hero-bg:  #2C4A52;   /* deep ocean */
+      --color-ink:      #2A2118;   /* warm near-black */
+      --color-muted:    #7A6E62;   /* driftwood */
+      --color-rule:     #DDD5C5;   /* sand rule */
+      --color-accent:   #C45C2A;   /* sun-dried terracotta — used sparingly */
+      --color-hero-ink: #EDE8DF;   /* light sand on dark hero */
+      --font-display:   'Playfair Display', Georgia, serif;
+      --font-body:      'Source Sans 3', system-ui, sans-serif;
+    }
+
+    /* ── Base ──────────────────────────────────────── */
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      line-height: 1.75;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      font-weight: 400;
+    }
+
+    a {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── Layout ────────────────────────────────────── */
+    .page-wrap {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ── Hero ──────────────────────────────────────── */
+    .hero {
+      background-color: var(--color-hero-bg);
+      color: var(--color-hero-ink);
+      padding: 0;
+      margin-bottom: 0;
+    }
+
+    .hero-inner {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 4.5rem 1.5rem 3.5rem;
+      position: relative;
+    }
+
+    /* subtle wave SVG rule at bottom of hero */
+    .hero-wave {
+      display: block;
+      width: 100%;
+      line-height: 0;
+      margin-top: -1px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 3.6rem);
+      line-height: 1.1;
+      margin-bottom: 0.6rem;
+      color: #FFFFFF;
+    }
+
+    .hero .tagline {
+      font-size: 1.05rem;
+      color: #A8C4CC;   /* muted sea foam */
+      margin-bottom: 0;
+      font-style: italic;
+    }
+
+    /* ── Sections ──────────────────────────────────── */
+    .resume-section {
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--color-rule);
+    }
+
+    .resume-section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Entry (work / education) ──────────────────── */
+    .entry {
+      margin-bottom: 2.2rem;
+    }
+    .entry:last-child {
+      margin-bottom: 0;
+    }
+
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .entry-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      margin-bottom: 0;
+    }
+
+    .entry-date {
+      font-size: 0.82rem;
+      color: var(--color-muted);
+      white-space: nowrap;
+    }
+
+    .entry-org {
+      font-size: 0.88rem;
+      color: var(--color-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .entry-body {
+      font-size: 0.97rem;
+    }
+
+    /* ── Projects ──────────────────────────────────── */
+    .project-card {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      margin-bottom: 2rem;
+      background-color: var(--color-surface);
+      border-radius: 6px;
+      padding: 1.1rem;
+      border: 1px solid var(--color-rule);
+    }
+
+    .project-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .project-thumb {
+      width: 90px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 4px;
+      flex-shrink: 0;
+      background-color: var(--color-rule); /* fallback while image loads */
+    }
+
+    .project-info {
+      flex: 1;
+    }
+
+    .project-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .project-desc {
+      font-size: 0.9rem;
+      color: var(--color-muted);
+      margin-bottom: 0.4rem;
+      line-height: 1.5;
+    }
+
+    .project-link {
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    /* ── Contact links ─────────────────────────────── */
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .contact-list li {
+      font-size: 0.97rem;
+    }
+
+    /* ── Footer ────────────────────────────────────── */
+    footer {
+      padding: 2rem 0;
+      font-size: 0.8rem;
+      color: var(--color-muted);
+    }
+
+    /* ── Responsive tweaks ─────────────────────────── */
+    @media (max-width: 480px) {
+      .project-card {
+        flex-direction: column;
+      }
+      .project-thumb {
+        width: 100%;
+        height: 140px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Hero (full-width dark band) ── -->
+  <header class="hero">
+    <div class="hero-inner">
+      <h1>Maggie Taylor</h1>
+      <p class="tagline">Educator and Technology Specialist.</p>
+    </div>
+    <!-- gentle wave separating hero from content -->
+    <svg class="hero-wave" viewBox="0 0 1440 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,32 C360,0 1080,56 1440,24 L1440,48 L0,48 Z" fill="#F5F0E8"/>
+    </svg>
+  </header>
+
+  <div class="page-wrap">
+
+    <!-- ── About ── -->
+    <section class="resume-section">
+      <p class="section-label">About</p>
+      <p>
+        Experienced and detail-oriented teacher and customer service professional with over 12 years of experience supporting learners, customers, and teams through effective use of technology. Skilled in developing training materials, providing user support, and creating solutions that make systems easier to use and understand. Known for clear communication, patience, empathy, and a practical approach to problem-solving.
+      </p>
+    </section>
+
+    <!-- ── Work History ── -->
+    <section class="resume-section">
+      <p class="section-label">Work History</p>
+
+      <div class="entry">
+        <div class="entry-header">
+          <h3 class="entry-title">K-12 Tutor</h3>
+          <span class="entry-date"> August 2025 – Present</span>
+        </div>
+        <p class="entry-org">Littera Education &mdash; Remote</p>
+        <p class="entry-body">
+          Specializing in Mathematics tutoring 
+          Provide 1:1 to 1:3 virtual tutoring using Littera Curriculum. 
+          Engage students with interactive lessons, virtual whiteboard tools, and 
+          targeted questioning to reinforce understanding. 
+
+        </p>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <h3 class="entry-title">Freelance Web and App Developer</h3>
+          <span class="entry-date">April 2023 – August 2025</span>
+        </div>
+        <p class="entry-org">Self Employed &mdash; Kansas City, MO</p>
+        <p class="entry-body">
+         Created business landing sites and android applications for individuals and small businesses.
+        </p>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <h3 class="entry-title">Technical Support Representative</h3>
+          <span class="entry-date">September 2022 – May 2023</span>
+        </div>
+        <p class="entry-org">EBSCO Information Services &mdash; Remote</p>
+        <p class="entry-body">
+          Provide first line diagnostic/troubleshooting support and technical expertise via phone and email to ensure customer satisfaction 
+          Answer customer questions and inquiries across entire suite of EBSCO products
+          Instruct clients with explanation of product features, installation, configuration, and deployment of product upgrades both verbally and in writing 
+          Conduct independent research in order to find solutions to customer problems
+        </p>
+      </div>
+      <div class="entry">
+        <div class="entry-header">
+          <h3 class="entry-title">Virtual Guide at Codeverse / Web Dev Bootcamp</h3>
+          <span class="entry-date">August 2020 – July 2022</span>
+        </div>
+        <p class="entry-org">Codeverse &mdash; Remote</p>
+        <p class="entry-body">
+         I taught kids ages 6-13 how to code online for Codeverse. 
+        Simultaneously enrolled and completed an introductory web development bootcamp
+
+        </p>
+      </div>
+      <div class="entry">
+        <div class="entry-header">
+          <h3 class="entry-title">Library Media Specialist</h3>
+          <span class="entry-date">August 2014 – June 2020</span>
+        </div>
+        <p class="entry-org">Shawnee Mission School District &mdash; Shawnee Mission, KS</p>
+        <p class="entry-body">
+         Wrote and implemented daily lesson plans for grades kindergarten through 6th grade which incorporate district/course curricular objectives. 
+          Used Google services for learning, including Google Classroom 
+          Created a landing personalized landing page for students in the library 
+
+        </p>
+      </div>
+
+    </section>
+
+    <!-- ── Education ── -->
+    <section class="resume-section">
+      <p class="section-label">Education</p>
+
+      <div class="entry">
+        <div class="entry-header">
+          <h3 class="entry-title">Master of Science in Educational Technology</h3>
+        </div>
+        <p class="entry-org">Pittsburg State University</p>
+        <p class="entry-body">
+          Graduated with honors July 2009, GPA 4.0 
+        </p>
+      </div>
+
+            <div class="entry">
+        <div class="entry-header">
+          <h3 class="entry-title">Bachelor of Science in International Business and Marketing</h3>
+        </div>
+        <p class="entry-org">Oklahoma State University</p>
+        <p class="entry-body">
+          Graduated with honors, GPA 3.75 
+        </p>
+      </div>
+
+            <div class="entry">
+        <div class="entry-header">
+          <h3 class="entry-title">Elementary Teaching Certification</h3>
+        </div>
+        <p class="entry-org">Northeastern State University</p>
+        <p class="entry-body">
+          Graduated with honors, GPA 4.0 
+        </p>
+      </div>
+
+            <div class="entry">
+        <div class="entry-header">
+          <h3 class="entry-title">Google IT Support Professional Certificate</h3>
+        </div>
+        <p class="entry-org">Coursera</p>
+        <p class="entry-body">
+   
+        </p>
+      </div>
+    </section>
+
+   <!-- Projects -->
+    <section class="resume-section">
+      <p class="section-label">Projects</p>
+
+      <!-- Project 1 — Math Quiz -->
+      <a class="project-card" href="project1.html">
+        <img
+          class="project-thumb"
+          src="question.png"
+          alt="Math Quiz app icon"
+          onerror="this.style.background='#DDD5C5';this.removeAttribute('src')"
+        />
+        <div class="project-info">
+          <h3 class="project-title">Math Quiz</h3>
+          <p class="project-desc">An Android multiplication and division drill app with spoken feedback via the Web Speech API.</p>
+          <span class="project-link">View project &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Project 2 — Calorie Counts -->
+      <a class="project-card" href="project2.html">
+        <img
+          class="project-thumb"
+          src="Appicon2.png"
+          alt="Calorie Counts app icon"
+          onerror="this.style.background='#DDD5C5';this.removeAttribute('src')"
+        />
+        <div class="project-info">
+          <h3 class="project-title">Calorie Counts</h3>
+          <p class="project-desc">A personal daily calorie tracker using localStorage to persist meal logs without a backend — something I still use every day.</p>
+          <span class="project-link">View project &rarr;</span>
+        </div>
+      </a>
+
+       <!-- Project 3 — Shot Tracker -->
+      <a class="project-card" href="project3.html">
+        <img
+          class="project-thumb"
+          src="Appicon3.png"
+          alt="Shot Tracker app icon"
+          onerror="this.style.background='#DDD5C5';this.removeAttribute('src')"
+        />
+        <div class="project-info">
+          <h3 class="project-title">Shot Tracker</h3>
+          <p class="project-desc">A medical log app built for a real user — tracking injection data for a pediatric clinical trial.</p>
+          <span class="project-link">View project &rarr;</span>
+        </div>
+      </a>
+
+
+    </section>
+
+    <!-- Contact -->
+    <section class="resume-section">
+      <p class="section-label">Contact</p>
+      <ul class="contact-list">
+        <li><a href="mailto:@email.com">taylorcoding359@gmail.com</a></li>
+        <li><a href="https://linkedin.com/in/maggie-taylor-codes" target="_blank">LinkedIn</a></li>
+        <li><a href="https://github.com/mtaylor12" target="_blank">GitHub</a></li>
+      </ul>
+    </section>
+
+    <footer>
+      <p>&copy; <span id="year"></span> Maggie Taylor</p>
+    </footer>
+
+  </div>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
